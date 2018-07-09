@@ -34,7 +34,6 @@ def _while(condition, *code):
     return "While " + condition + exec() + exec().join([str(x) for x in code]) + exec() + "WhileEnd" + exec()
 
 
-
 if __name__ == '__main__':
     prgrm = main(
         pr("hello user!"),
@@ -47,7 +46,7 @@ if __name__ == '__main__':
             pr("A")
         ),
         _while(
-            "A=1",
+            "A<10",
             assign("A", "A+1"),
             pr("A")
 
