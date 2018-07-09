@@ -35,7 +35,6 @@ def _while(condition, *code):
 
 
 if __name__ == '__main__':
-
     globals = [
         assign("D", 10),
     ]
@@ -55,7 +54,9 @@ if __name__ == '__main__':
             assign("A", "A+1"),
             pr("A")
 
-        )
+        ),
+
+        globals=globals
     )
     print(prgrm)
 
