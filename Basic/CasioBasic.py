@@ -82,7 +82,21 @@ if __name__ == '__main__':
 
         globals=global_vars
     )
-    print(prgrm)
+
+
+    entropy = main(
+        pr_txt("Entropy"),
+
+        alloc_list(1, 100),
+        rd("Mat A"),
+        pr_var("Mat A"),
+    )
+
+
+    print(entropy)
+
+
+
 
     with open("Output.txt", "w") as text_file:
         text_file.write(prgrm)
