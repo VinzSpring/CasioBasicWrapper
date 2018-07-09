@@ -27,14 +27,19 @@ def _if(cond, then, _else):
 
 def _for(var, _from, to, step, *lines):
     return "For " + assign(var, _from) + " to " + str(to) + " Step " + str(step) + exec() + \
-           exec().join([str(x) for x in lines]) + exec() + "Next" + exec()
+           exec().join([str(x) for x in lines]) + exec() + "Next"
 
 
 def _while(condition, *code):
-    return "While " + condition + exec() + exec().join([str(x) for x in code]) + exec() + "WhileEnd" + exec()
+    return "While " + condition + exec() + exec().join([str(x) for x in code]) + exec() + "WhileEnd"
 
 
 if __name__ == '__main__':
+
+    globals = [
+        assign("D", 10),
+    ]
+
     prgrm = main(
         pr("hello user!"),
         rd("A"),
