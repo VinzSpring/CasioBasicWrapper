@@ -46,7 +46,7 @@ def alloc_list(list_num, length):
     return assign("Dim List " + str(list_num), length)
 
 def alloc_matrix(mat_num, i, j):
-    return assign("Dim Mat ", "{" + i + "," + j + "}")
+    return assign("Dim Mat ", "{" + str(i) + "," + str(j) + "}")
 
 
 if __name__ == '__main__':
@@ -58,6 +58,9 @@ if __name__ == '__main__':
         pr_txt("hello user!"),
         pr_txt("global vars:"),
         pr_txt("D:"), pr_var("D"),
+
+        alloc_matrix(1, 2, 2),
+        pr_var("Matrix 1"),
 
         alloc_list(1, 10),
         pr_var("List 1"),
