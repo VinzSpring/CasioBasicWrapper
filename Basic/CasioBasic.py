@@ -26,7 +26,7 @@ def _if(cond, then, _else):
 
 
 def _for(var, _from, to, step, *lines):
-    return "For " + assign(var, _from) + " to " + str(to) + " Step " + str(step) + exec() + \
+    return "For " + assign(var, _from) + " To " + str(to) + " Step " + str(step) + exec() + \
            exec().join([str(x) for x in lines]) + exec() + "Next"
 
 
@@ -35,15 +35,19 @@ def _while(condition, *code):
 
 
 if __name__ == '__main__':
-    globals = [
+    global_vars = [
         assign("D", 10),
     ]
 
     prgrm = main(
         pr("hello user!"),
+        pr("global vars:"),
+        pr("D:"), "D",
         rd("A"),
+        pr("A"),
         assign("B", 51),
         assign("C", "A+B"),
+        pr("C"),
         "C",
         _for(
             "A", 1, 100, 1,
@@ -56,7 +60,7 @@ if __name__ == '__main__':
 
         ),
 
-        globals=globals
+        globals=global_vars
     )
     print(prgrm)
 
