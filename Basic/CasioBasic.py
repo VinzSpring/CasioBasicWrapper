@@ -45,8 +45,8 @@ def square(a):
 def alloc_list(list_num, length):
     return assign("Dim List " + str(list_num), length)
 
-def alloc_matrix(mat_num, i, j):
-    return assign("Dim Mat ", "{" + str(i) + "," + str(j) + "}")
+def alloc_matrix(mat_name, i, j):
+    return assign("Dim Mat " + mat_name, "{" + str(i) + "," + str(j) + "}")
 
 
 if __name__ == '__main__':
@@ -59,8 +59,8 @@ if __name__ == '__main__':
         pr_txt("global vars:"),
         pr_txt("D:"), pr_var("D"),
 
-        alloc_matrix(1, 2, 2),
-        pr_var("Matrix 1"),
+        alloc_matrix("A", 2, 2),
+        pr_var("Mat A"),
 
         alloc_list(1, 10),
         pr_var("List 1"),
