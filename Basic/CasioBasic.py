@@ -34,20 +34,6 @@ def _while(condition, *code):
     return "While " + condition + exec() + exec().join([str(x) for x in code]) + exec() + "WhileEnd" + exec()
 
 
-def list(i, j):
-    return " List" + str(i) + "[" + str(i) + "] "
-
-class List([]):
-
-    @staticmethod
-    def alloc(var, length):
-        return assign(var, " DimList " + length)
-
-    @staticmethod
-    def get(var, i):
-        return var + "[" + i + "]"
-
-
 
 if __name__ == '__main__':
     prgrm = main(
@@ -60,7 +46,6 @@ if __name__ == '__main__':
             "A", 1, 100, 1,
             pr("A")
         ),
-        assign("X", list())
         _while(
             "A=1",
             assign("A", "A+1"),
