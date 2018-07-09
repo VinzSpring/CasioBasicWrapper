@@ -86,6 +86,12 @@ if __name__ == '__main__':
 
     entropy = main(
         pr_txt("Entropy"),
+        pr_txt("N:"),
+        rd("N"),
+        alloc_list(1, "N"),
+        pr_var("List 1"),
+
+
 
         alloc_list(1, 100),
         rd("Mat A"),
