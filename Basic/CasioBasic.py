@@ -53,11 +53,11 @@ if __name__ == '__main__':
             "A", 1, 30, 1,
             "A"
         ),
+        assign("A", 1),
         _while(
             "A<10",
             assign("A", "A+1"),
             "A"
-
         ),
 
         globals=global_vars
