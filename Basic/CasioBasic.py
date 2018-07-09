@@ -5,6 +5,7 @@ def exec():
 def pr_txt(txt):
     return '"' + txt + '"'
 
+
 def pr_var(var):
     return str(var) + "Ø"
 
@@ -36,17 +37,25 @@ def _for(var, _from, to, step, *lines):
 def _while(condition, *code):
     return "While " + condition + exec() + exec().join([str(x) for x in code]) + exec() + "WhileEnd"
 
+
 def div(a, b):
     return a + "»" + b
+
 
 def square(a):
     return a + "’"
 
+
 def alloc_list(list_num, length):
     return assign("Dim List " + str(list_num), length)
 
+
 def alloc_matrix(mat_name, i, j):
     return assign("Dim Mat " + mat_name, "{" + str(i) + "," + str(j) + "}")
+
+
+def clear(var):
+    return assign(var, 0)
 
 
 if __name__ == '__main__':
@@ -83,7 +92,6 @@ if __name__ == '__main__':
         globals=global_vars
     )
 
-
     entropy = main(
         pr_txt("Entropy"),
         pr_txt("N:"),
@@ -91,18 +99,19 @@ if __name__ == '__main__':
         alloc_list(1, "N"),
         pr_var("List 1"),
 
+        #sum
+        clear("A"),
+        clear("B"),
+        _for(
+            "I", 0, "N-1", 1,
 
+            assign("A", "List 1[I]"),
+            assign("B", "A * " + div(1, "A"))
+        ),
 
-        alloc_list(1, 100),
-        rd("Mat A"),
-        pr_var("Mat A"),
     )
 
-
     print(entropy)
-
-
-
 
     with open("Output.txt", "w") as text_file:
         text_file.write(prgrm)
