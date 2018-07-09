@@ -39,7 +39,7 @@ def _while(condition, *code):
 
 
 def div(a, b):
-    return a + "»" + b
+    return str(a) + "»" + str(b)
 
 
 def square(a):
@@ -53,9 +53,14 @@ def alloc_list(list_num, length):
 def alloc_matrix(mat_name, i, j):
     return assign("Dim Mat " + mat_name, "{" + str(i) + "," + str(j) + "}")
 
+def mult(a, b):
+    return str(a) + "À" + str(b)
 
 def clear(var):
     return assign(var, 0)
+
+def logab(a, b):
+    return "log " + str(a) + "(" + str(b) + ")"
 
 
 if __name__ == '__main__':
@@ -96,19 +101,16 @@ if __name__ == '__main__':
         pr_txt("Entropy"),
         pr_txt("N:"),
         rd("N"),
-        alloc_list(1, "N"),
-        pr_var("List 1"),
-
         #sum
         clear("A"),
         clear("B"),
         _for(
             "I", 0, "N-1", 1,
-
-            assign("A", "List 1[I]"),
-            assign("B", "A * " + div(1, "A"))
+            pr_txt("enter p:"),
+            rd("A"),
+            assign("B", mult("A", logab(2, div(1, "A"))))
         ),
-
+        pr_var("B"),
     )
 
     print(entropy)
