@@ -39,7 +39,7 @@ def _while(condition, *code):
 
 
 def div(a, b):
-    return str(a) + "»" + str(b)
+    return "(" + str(a) + ")»(" + str(b) + ")"
 
 
 def square(a):
@@ -60,7 +60,7 @@ def clear(var):
     return assign(var, 0)
 
 def logab(a, b):
-    return "log " + str(a) + "(" + str(b) + ")"
+    return "log a(b)" + str(a) + "," + str(b) + ")"
 
 
 if __name__ == '__main__':
@@ -99,6 +99,9 @@ if __name__ == '__main__':
 
     entropy = main(
         pr_txt("Entropy"),
+
+        pr_txt("sub intervals:"),
+        rd("C"),
         pr_txt("N:"),
         rd("N"),
         #sum
@@ -106,14 +109,12 @@ if __name__ == '__main__':
         clear("B"),
         _for(
             "I", 0, "N-1", 1,
-            pr_txt("enter p:"),
+            pr_txt("enter p(i):"),
             rd("A"),
-            assign("B", mult("A", logab(2, div(1, "A"))))
+            assign("B", "B+" + mult(div("A", "C"), logab(2, div("C", "A"))))
         ),
+
         pr_var("B"),
     )
 
     print(entropy)
-
-    with open("Output.txt", "w") as text_file:
-        text_file.write(prgrm)
