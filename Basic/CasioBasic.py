@@ -62,6 +62,8 @@ def clear(var):
 def logab(a, b):
     return "log a(b)" + str(a) + "," + str(b) + ")"
 
+def sortA(list):
+    return "SortA(" + str(list) + ")"
 
 if __name__ == '__main__':
     global_vars = [
@@ -115,6 +117,35 @@ if __name__ == '__main__':
         ),
 
         pr_var("B"),
+    ),
+
+    #print(entropy)
+
+
+
+    global_shanon_fano = [  
+        alloc_list(1, "N"),
+        alloc_matrix("M", "N", 255),
+    ]
+    shannon_fano = main(
+        pr_txt("Shannon Fano"),
+
+        # number of codewords
+        pr_txt("N:"),
+        rd("N"),
+
+        # read codeword probability
+        _for("I", 1, "N", 1,
+            pr_txt("enter p(i):"),
+            rd("List 1[I]"),
+        ),
+
+        # sort ascending
+        sortA("List 1"),
+
+        pr_var("List 1"),
+
+        globals=global_shanon_fano
     )
 
-    print(entropy)
+    print(shannon_fano),
