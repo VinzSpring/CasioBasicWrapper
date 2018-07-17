@@ -1,4 +1,4 @@
-from Basic.CasioBasic import *
+from Basic import *
 
 
 if __name__ == '__main__':
