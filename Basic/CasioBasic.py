@@ -22,10 +22,10 @@ def main(*lines, globals=[]):
     return (exec()).join(globals) + exec() + (exec()).join(lines) + exec()
 
 
-def _if(cond, then, _else):
-    cmd = "If " + cond + exec() + then + exec()
+def cb_if(cond, _then, _else=None):
+    cmd = "If " + cond + exec() + "Then " + exec().join(_then)
     if _else is not None:
-        cmd += "\nElse " + _else + exec()
+        cmd += "\nElse " + "".join(_else) + exec()
     return cmd + exec() + "IfEnd"
 
 

@@ -79,7 +79,24 @@ if __name__ == '__main__':
         # sort ascending
         sortA("List 1"),
 
-        pr_var("List 1"),
+        # find middle
+        assign("A", "List 1[1]"), 
+        cb_for("I", 2, "N", 1,
+            assign("A", add("A", "List 1[I]")),
+            cb_if("(A>0.5) Or (A=0.5)",
+                _then=(
+                    assign("X", "|A-0.5|"),
+                    assign("Y", "|0.5-A|"), # TODO fix negative numer
+                    pr_var("X"),
+                    pr_var("Y"),
+                ), 
+                _else=(
+                    
+                )
+                
+            ),
+        ),
+
 
         globals=global_shanon_fano
     )
@@ -114,4 +131,4 @@ if __name__ == '__main__':
         pr_var("A"),
     )
 
-    print(entropy)
+    print(shannon_fano)
