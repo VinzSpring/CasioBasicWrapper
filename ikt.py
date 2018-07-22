@@ -82,7 +82,7 @@ if __name__ == '__main__':
         pr_txt("N:"),
         rd("N"),
 
-        alloc_list(1, "N"),             # codeword-list
+        alloc_matrix("C", 1, "N"),      # codeword-list
         alloc_matrix("A", "N", 255),    # encoded matrix
 
         # read codeword probability
@@ -123,7 +123,7 @@ if __name__ == '__main__':
             # Interval consist of two items
             cb_if("(F-G)=1",
                 _then=(
-                    assign("Mat A[F,H]", 1),
+                    assign("Mat A[F,H]", 1), # TODO: Fix dimenstion error (column at 256!)
                     assign("Mat A[G,H]", 0),
                     assign("E", "E-1"),
                     goto("1"),
@@ -143,23 +143,23 @@ if __name__ == '__main__':
                     ),
                 ),
 
-                assign("A", "A+List 1[L]"),
+                assign("A", "A+Mat C[1,L]"),
 
-                cb_if("A>=(Dx0.5) and J=0",
+                cb_if("AÉ(DÀ0.5) And J=0",
                     _then=(
-                        assign("B", "A-(Dx0.5)"),
-                        assign("C", "|(A-List 1[L])-(Dx0.5)|"),
+                        assign("B", "A-(DÀ0.5)"),
+                        assign("C", "|(A-Mat C[1,L])-(DÀ0.5)|"),
 
-                        cb_if("B<=C",
-                            _then=(
+                        cb_if("BÉC",
+                            _then=( # TODO: fix if-else wrapper!
                                 assign("I", "L"),
                             ),
                             _else=(
-                                assign("I", "L-1"),
-                                assign("Mat A[L,H]", 0),
+                                goto("2"),
                             ),
                         ),
 
+                        lbl("3"),
                         assign("J", 1),
                     ),
                 ),
@@ -180,6 +180,13 @@ if __name__ == '__main__':
         ),
 
         pr_var("Mat A"),
+        goto("4"),
+
+        lbl("2"),
+        assign("I", "L-1"),
+        assign("Mat A[L,H]", 0),
+        goto("3"),
+        lbl("4"),
 
         globals=global_shanon_fano
     )
