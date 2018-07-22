@@ -3,7 +3,8 @@
 #include <iostream>
 
 //double numbers[6] = { 0.05, 0.05, 0.1, 0.2, 0.25, 0.35 };
-double numbers[4] = { 0.1, 0.2, 0.3, 0.4 };
+//double numbers[4] = { 0.1, 0.2, 0.3, 0.4 };
+double numbers[8] = { 0.05, 0.06, 0.08, 0.10, 0.12, 0.14, 0.15, 0.30 };
 
 int code[255][255];
 
@@ -54,24 +55,25 @@ void find_middle() {
 
 	for (int i = ind_start; i <= ind_end; i++) {
 
-		if (!found_middle) {
+		if (found_middle) {
 			code[i][colum] = 0;
-		}
-		else {
+
+		} else {
 			code[i][colum] = 1;
 		}
 
 		count += numbers[i];
 
-		if (count >= (sum/2) && !found_middle) {
-			err1 = count - (sum/2); // TODO: ERR NOT ALWAYS -0.5
-			err2 = fabs((count - numbers[i]) - (sum/2));
+		if (count >= (sum* 0.5f) && !found_middle) {
+			err1 = count - (sum* 0.5f);
+			err2 = fabs((count - numbers[i]) - (sum* 0.5f));
 
-			if (err1 < err2) {
+			if (err1 <= err2) {
 				split_at = i;
-			}
-			else {
+
+			} else {
 				split_at = i - 1;
+				code[i][colum] = 0;
 			}
 
 			found_middle = 1;
