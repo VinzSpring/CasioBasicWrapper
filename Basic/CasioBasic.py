@@ -72,3 +72,9 @@ def sortA(ls):
 
 def add(*a):
     return "+".join(a)
+
+def lbl(label):
+    return "Lbl " + str(label)
+
+def goto(label):
+    return "Goto " + str(label)

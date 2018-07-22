@@ -18,16 +18,16 @@ int stack_count = -1;
 
 int ind_start = 0;
 int ind_end = 0;
-int colum = 0;
+int column = 0;
 
 int split_at = 0;
 int found_middle = 0;
 
-void find_middle() {
+void next_step() {
 	// Update variables
 	ind_start = stack[stack_count][0];
 	ind_end = stack[stack_count][1];
-	colum = stack[stack_count][2];
+	column = stack[stack_count][2];
 
 	// Reset vars
 	count = 0;
@@ -41,8 +41,8 @@ void find_middle() {
 
 	// Interval consist of two items
 	if (ind_end - ind_start == 1) {
-		code[ind_start][colum] = 1;
-		code[ind_end][colum] = 0;
+		code[ind_start][column] = 1;
+		code[ind_end][column] = 0;
 		stack_count--;
 		return;
 	}
@@ -56,10 +56,10 @@ void find_middle() {
 	for (int i = ind_start; i <= ind_end; i++) {
 
 		if (found_middle) {
-			code[i][colum] = 0;
+			code[i][column] = 0;
 
 		} else {
-			code[i][colum] = 1;
+			code[i][column] = 1;
 		}
 
 		count += numbers[i];
@@ -73,25 +73,25 @@ void find_middle() {
 
 			} else {
 				split_at = i - 1;
-				code[i][colum] = 0;
+				code[i][column] = 0;
 			}
 
 			found_middle = 1;
 		}
 	}
 
-	// Push next iteration
-	colum++;
+	// Push next iterations
+	column++;
 
-	// Dont increase stack to simulate 'pop' iteration
+	// Dont increase stack to simulate 'pop' from stack
 	stack[stack_count][0] = ind_start;
 	stack[stack_count][1] = split_at;
-	stack[stack_count][2] = colum;
+	stack[stack_count][2] = column;
 
 	stack_count++;
 	stack[stack_count][0] = split_at + 1;
 	stack[stack_count][1] = ind_end;
-	stack[stack_count][2] = colum;
+	stack[stack_count][2] = column;
 }
 
 
@@ -115,7 +115,7 @@ int main(int argc, char *argv[]) {
 
 
 	while (stack_count > -1) {
-		find_middle();
+		next_step();
 	}
 
 	for (int i = 0; i < (sizeof(numbers) / sizeof(double)); i++) {

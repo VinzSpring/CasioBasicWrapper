@@ -59,9 +59,21 @@ if __name__ == '__main__':
 
 
 
-    global_shanon_fano = [
-        alloc_list(1, "N"),
-        alloc_matrix("M", "N", 255),
+    global_shanon_fano = [        
+        assign("A", 0),                 # count
+        assign("B", 0),                 # err1
+        assign("C", 0),                 # err2
+        assign("D", 0),                 # sum
+
+        alloc_matrix("B", 255, 3),      # stack
+        assign("E", 0),                 # stack-count
+
+        assign("F", 0),                 # ind_start
+        assign("G", 0),                 # ind_end
+        assign("H", 1),                 # column
+
+        assign("I", 0),                 # split-at
+        assign("J", 0),                 # found_middle
     ]
     shannon_fano = main(
         pr_txt("Shannon Fano"),
@@ -69,6 +81,9 @@ if __name__ == '__main__':
         # number of codewords
         pr_txt("N:"),
         rd("N"),
+
+        alloc_list(1, "N"),             # codeword-list
+        alloc_matrix("A", "N", 255),    # encoded matrix
 
         # read codeword probability
         cb_for("I", 1, "N", 1,
@@ -79,24 +94,92 @@ if __name__ == '__main__':
         # sort ascending
         sortA("List 1"),
 
-        # find middle
-        assign("A", "List 1[1]"), 
-        cb_for("I", 2, "N", 1,
-            assign("A", add("A", "List 1[I]")),
-            cb_if("(A>0.5) Or (A=0.5)",
+        # Init first iteration
+        assign("E", "E+1"),
+        assign("Mat B[E,1]", 1),
+        assign("Mat B[E,2]", "N"),
+        assign("Mat B[E,3]", 1),
+
+        # Encode while stack not empty
+        lbl("1"),
+        cb_while("E>-1",
+            # Update variables
+            assign("F", "Mat B[E,1]"),
+            assign("G", "Mat B[E,2]"),
+            assign("H", "Mat B[E,3]"),
+
+            # Reset vars
+            assign("A", 0),
+            assign("J", 0),
+            
+            # Break condition
+            cb_if("(G-F)=1",
                 _then=(
-                    assign("X", "|A-0.5|"),
-                    assign("Y", "|0.5-A|"), # TODO fix negative numer
-                    pr_var("X"),
-                    pr_var("Y"),
-                ), 
-                _else=(
-                    
-                )
-                
+                    assign("E", "E-1"),
+                    goto("1"),
+                ),
             ),
+
+            # Interval consist of two items
+            cb_if("(F-G)=1",
+                _then=(
+                    assign("Mat A[F,H]", 1),
+                    assign("Mat A[G,H]", 0),
+                    assign("E", "E-1"),
+                    goto("1"),
+                ),
+            ),
+
+            # Get actual item sum
+            assign("D", "Sum List 1"),
+
+            cb_for("L", "F", "G", 1,
+                cb_if("J=1",
+                    _then=(
+                        assign("Mat A[L,H]", 0),
+                    ),
+                    _else=(
+                        assign("Mat A[L,H]", 1),
+                    ),
+                ),
+
+                assign("A", "A+List 1[L]"),
+
+                cb_if("A>=(Dx0.5) and J=0",
+                    _then=(
+                        assign("B", "A-(Dx0.5)"),
+                        assign("C", "|(A-List 1[L])-(Dx0.5)|"),
+
+                        cb_if("B<=C",
+                            _then=(
+                                assign("I", "L"),
+                            ),
+                            _else=(
+                                assign("I", "L-1"),
+                                assign("Mat A[L,H]", 0),
+                            ),
+                        ),
+
+                        assign("J", 1),
+                    ),
+                ),
+            ),
+
+            # Push next iterations
+            assign("H", "H+1"),
+
+            # Dont increase stack to simulate 'pop' from stack
+            assign("Mat B[E,1]", "F"),
+            assign("Mat B[E,2]", "I"),
+            assign("Mat B[E,3]", "H"),
+
+            assign("E", "E+1"),
+            assign("Mat B[E,1]", "I+1"),
+            assign("Mat B[E,2]", "G"),
+            assign("Mat B[E,3]", "H"),
         ),
 
+        pr_var("Mat A"),
 
         globals=global_shanon_fano
     )
