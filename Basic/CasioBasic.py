@@ -54,7 +54,7 @@ def alloc_matrix(mat_name, i, j):
     return assign("Dim Mat " + mat_name, "{" + str(i) + "," + str(j) + "}")
 
 
-def mult(*a):
+def mul(*a):
     return "À".join(a)
 
 
@@ -73,8 +73,32 @@ def sortA(ls):
 def add(*a):
     return "+".join(a)
 
+def sub(*a):
+    return "-".join(a)
+
 def lbl(label):
     return "Lbl " + str(label)
 
 def goto(label):
     return "Goto " + str(label)
+
+def equal(var1, var2):
+    return str(var1) + "=" + str(var2)
+
+def nequal(var1, var2):
+    return str(var1) + "È" + str(var2)
+
+def gt(var1, var2):
+    return str(var1) + ">" + str(var2)
+
+def lt(var1, var2):
+    return str(var1) + "<" + str(var2)
+
+def gore(var1, var2):
+    return str(var1) + "Ê" + str(var2)
+
+def lore(var1, var2):
+    return str(var1) + "É" + str(var2)
+
+def abslt(term):
+    return "|" + str(term) + "|"
