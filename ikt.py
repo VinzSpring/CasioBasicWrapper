@@ -53,7 +53,7 @@ if __name__ == '__main__':
             "I", 0, "N-1", 1,
             pr_txt("enter p(i):"),
             rd("A"),
-            assign("B", "B+" + mult("A", add(logab(2, div(1, "A")), "C")))
+            assign("B", add("B", mult("A", add(logab(2, div(1, "A")), "C"))))
         ),
 
         pr_var("B"),
