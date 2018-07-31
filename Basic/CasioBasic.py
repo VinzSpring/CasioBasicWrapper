@@ -18,12 +18,15 @@ def rd(var):
     return assign(var, "?")
 
 
-def main(*lines, globals=[]):
-    return (exec()).join(globals) + exec() + (exec()).join(lines) + exec()
+def main(*lines, globals=[], prgrm_name=""):
+    prgrm = ""
+    if prgrm_name:
+        prgrm += "Filename:" + prgrm_name
+    return prgrm + (exec()).join(globals) + exec() + (exec()).join(lines) + exec()
 
 
-def cb_if(cond, _then, _else=None):
-    cmd = "If " + cond + exec() + "Then " + exec().join(_then)
+def cb_if(cond, *then, _else=None):
+    cmd = "If " + cond + exec() + "Then " + exec().join(then)
     if _else is not None:
         cmd += "\nElse " + "".join(_else) + exec()
     return cmd + exec() + "IfEnd"
@@ -55,6 +58,7 @@ def alloc_matrix(mat_name, i, j):
 
 
 def mult(*a):
+    a = ["(" + str(b) + ")" for b in a]
     return "À".join(a)
 
 
@@ -72,3 +76,11 @@ def sortA(ls):
 
 def add(*a):
     return "+".join(a)
+
+
+def equals(a, b):
+    return a + "=" + str(b)
+
+
+def not_equal(a, b):
+    return a + "È" + str(b)
