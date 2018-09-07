@@ -2,9 +2,13 @@
 
 A collection of python monads for compiling Casio-Basic scriptsin python.
 
-example:
-
-Calculating the entropy of given characters given their probability
+## Example:
+### support for Matrices and Lists
+```python
+        alloc_matrix("C", "M", 1)
+        assign("Mat C", mult("Mat B", "Mat A"))
+```
+### 1. Calculating the entropy of given characters given their probability
 ```python
     entropy = main(
         pr_txt("Entropy"),
