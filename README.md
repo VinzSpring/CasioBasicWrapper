@@ -2,7 +2,23 @@
 
 A collection of python monads for compiling Casio-Basic scriptsin python.
 
-## Example:
+## Example (read the libraray, it's self explanatory):
+### assignments
+```python
+assign("C", 1337)
+```
+### Loops and conditions
+```python
+        cb_for(
+            "I", 0, "N-1", 1,
+            pr_var("I"),
+        )
+        
+        cb_if(
+            not_equal("Mat B[J,I]", 0),
+            pr_txt("not 0"),
+        )
+```
 ### support for Matrices and Lists
 ```python
         alloc_matrix("C", "M", 1)
