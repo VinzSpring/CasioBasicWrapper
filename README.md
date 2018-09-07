@@ -1,6 +1,6 @@
 # CasioBasicWrapper
 
-A collection of python monads for compiling Casio-Basic scriptsin python.
+A collection of python monads for compiling Casio-Basic scripts in python.
 
 ## Example (read the libraray, it's self explanatory):
 ### assignments
