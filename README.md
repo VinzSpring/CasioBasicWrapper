@@ -26,7 +26,7 @@ assign("C", 1337)
 ```
 ### 1. Calculating the entropy of given characters given their probability
 ```python
-    entropy = main(
+    casio_basic_code = main(
         pr_txt("Entropy"),
 
         pr_txt("N?:"),
@@ -50,4 +50,5 @@ assign("C", 1337)
 
         pr_var("B"),
     )
+    print(casio_basic_code)
 ```
